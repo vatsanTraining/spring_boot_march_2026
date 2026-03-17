@@ -1,5 +1,6 @@
 package com.example.demo.ifaces;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,6 @@ public interface BookRepository {
 	
 	Optional<Book> findbyId(int id) throws BookNotFoundException;
 	
-	List<Book> findAll();
+	Collection<Book> findAll();
 	
 }

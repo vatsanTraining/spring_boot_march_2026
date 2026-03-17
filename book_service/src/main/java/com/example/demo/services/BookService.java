@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.example.demo.exceptions.BookNotFoundException;
@@ -31,7 +32,7 @@ public class BookService {
 		return this.repo.findbyId(id).orElseThrow(() -> new BookNotFoundException("Element with Given Id Not Found"));
 	}
 	
-	public List<Book> findAll(){
+	public Collection<Book> findAll(){
 		
 		return this.repo.findAll();
 	}
