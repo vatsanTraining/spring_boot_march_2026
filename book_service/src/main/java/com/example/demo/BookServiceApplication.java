@@ -1,19 +1,35 @@
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.demo.model.Book;
 import com.example.demo.services.BookService;
+
 
 @SpringBootApplication
 public class BookServiceApplication {
 
 	public static void main(String[] args) {
 		
-		ConfigurableApplicationContext ctx=SpringApplication.run(BookServiceApplication.class, args);
+		/*
+		 * First Argument to the run method is a Java class annotated
+		 * @SpringBootApplication
+		 * the primary source should be java class with @SpringBootApplication
+		 * 
+		 */
+		//ConfigurableApplicationContext ctx=SpringApplication.run(BookServiceApplication.class, args);
 	
+		
+		SpringApplication app = new SpringApplication(BookServiceApplication.class);
+		
+		 app.setWebApplicationType(WebApplicationType.NONE);
+		 
+		 ConfigurableApplicationContext ctx=app.run(args);
+		
 		
 		System.out.println(ctx.getBean("javaOne"));
 
