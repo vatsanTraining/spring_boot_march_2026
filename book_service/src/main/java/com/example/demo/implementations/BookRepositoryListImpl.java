@@ -8,14 +8,18 @@ import com.example.demo.exceptions.BookNotFoundException;
 import com.example.demo.ifaces.BookRepository;
 import com.example.demo.model.Book;
 
-public class BookRepositoryImpl implements BookRepository {
+/*
+ * LOW LEVEL MODULE - ONE 
+ * THIS CAN BE SWAPPED
+ */
+public class BookRepositoryListImpl implements BookRepository {
 
 
 	private List<Book> bookList;
 	
 	
 	
-	public BookRepositoryImpl() {
+	public BookRepositoryListImpl() {
 		super();
 
 		this.bookList = new ArrayList<>();

@@ -7,6 +7,9 @@ import java.util.Optional;
 import com.example.demo.exceptions.BookNotFoundException;
 import com.example.demo.model.*;
 
+/*
+ * ABSTRACTION
+ */
 public interface BookRepository {
 
 	
