@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.CustomerDto;
+import com.example.demo.dto.ResponseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.ifaces.CustomerRepository;
 
@@ -30,5 +32,17 @@ public class CustomerService {
 	public List<Customer> findAll(){
 		
 		return this.repo.findAll();
+	}
+	
+	public ResponseDto findByCustomerName(String custName) {
+		
+		return this.repo.findByCustomerName(custName);
+	}
+	
+	public CustomerDto findByPhone(long phone) {
+		
+		Customer cust =this.repo.fetchByPhone(phone);
+		
+		return new CustomerDto(cust.getCustomerId(), cust.getCustomerName(), cust.getEmail(), cust.getPhoneNumber());
 	}
 }

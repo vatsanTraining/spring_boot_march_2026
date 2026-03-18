@@ -21,6 +21,15 @@ public class CustomerServiceApplication {
 		  .findAll()
 		  .forEach(System.out::println);
 		
+		
+		CustomerService service = ctx.getBean(CustomerService.class);
+		
+		
+		System.out.println("Find By Name:=>"+ service.findByCustomerName("Vishwa"));
+		
+		
+		System.out.println("Find By Phone Number:=>"+ service.findByPhone(8928244L));
+		
 	
 		ctx.close();
 	}
