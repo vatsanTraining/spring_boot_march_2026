@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +25,8 @@ import com.example.demo.repos.LoanApplicationRepository;
 
 @Repository
 //@Primary
-//@ConditionalOnProperty(name = "storage.medium", havingValue = "file")
-@Profile("test")
+@ConditionalOnProperty(name = "storage.medium", havingValue = "file")
+//@Profile("prod")
 public class TextFileLoanImpl implements LoanApplicationRepository {
 
 
@@ -70,8 +71,12 @@ public class TextFileLoanImpl implements LoanApplicationRepository {
 		}
 		}
 		boolean result=false;
-		try (BufferedWriter buffer = Files.newBufferedWriter(path,StandardCharsets.UTF_8,
+		
+		
+		try (BufferedWriter buffer = Files.newBufferedWriter
+				(path,StandardCharsets.UTF_8,
 				    StandardOpenOption.APPEND );
+				
 				PrintWriter writer = new PrintWriter(buffer);
 				
 				){
@@ -103,6 +108,7 @@ public class TextFileLoanImpl implements LoanApplicationRepository {
 		    
 		    LoanApplication loan = new LoanApplication(applicationNumber,name,loanAmount,pan);
 			        return Optional.of(loan);
+			        
 	    } catch (Exception e) {
 	    	
 	    	System.out.println(e.getMessage());

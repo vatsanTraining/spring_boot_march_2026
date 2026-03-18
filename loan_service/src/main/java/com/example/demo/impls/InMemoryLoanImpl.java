@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,9 @@ import com.example.demo.repos.LoanApplicationRepository;
 
 
 @Repository
-//@ConditionalOnProperty(name = "storage.type", havingValue = "memory")
-@Profile("dev")
+@ConditionalOnProperty(name = "storage.medium", havingValue = "memory")
+//@Profile("dev")
+//@Primary
 public class InMemoryLoanImpl implements LoanApplicationRepository {
 
 
