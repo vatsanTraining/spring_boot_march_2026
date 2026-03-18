@@ -35,7 +35,7 @@ public class BookService {
 		super();
 		this.repo = repo;
 		
-		System.out.println(this.repo.getClass().getName());
+		// System.out.println(this.repo.getClass().getName());
 	}
 
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.demo.exceptions.BookNotFoundException;
 import com.example.demo.ifaces.BookRepository;
 import com.example.demo.model.Book;
@@ -15,6 +17,7 @@ import com.example.demo.model.Book;
 public class BookRepositoryListImpl implements BookRepository {
 
 
+	@Autowired
 	private List<Book> bookList;
 	
 	
@@ -22,7 +25,7 @@ public class BookRepositoryListImpl implements BookRepository {
 	public BookRepositoryListImpl() {
 		super();
 
-		this.bookList = new ArrayList<>();
+		//this.bookList = new ArrayList<>();
 	}
 
 	@Override

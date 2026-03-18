@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.demo.exceptions.BookNotFoundException;
 import com.example.demo.ifaces.BookRepository;
 import com.example.demo.model.Book;
