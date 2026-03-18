@@ -1,0 +1,12 @@
+Create a Java Class Doctor with a List of Patient  Using the JPA One to Many Architecture persist the Doctor along with his patients
+and retrieve Doctors details along with Patients 
+
+class Patient{
+
+
+}
+
+class Doctor {
+
+List<Patient> patients
+}
