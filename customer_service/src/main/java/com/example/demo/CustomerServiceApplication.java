@@ -4,16 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import com.example.demo.entity.Customer;
 import com.example.demo.ifaces.CustomerRepository;
+import com.example.demo.services.CustomerService;
 
 @SpringBootApplication
 public class CustomerServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CustomerServiceApplication.class, args);
+		ConfigurableApplicationContext ctx= SpringApplication.run(CustomerServiceApplication.class, args);
+	
+		ctx.getBean(CustomerService.class)
+		  .findAll()
+		  .forEach(System.out::println);
+		
+	
+		ctx.close();
 	}
 
 	
