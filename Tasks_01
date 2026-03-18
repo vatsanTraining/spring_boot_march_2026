@@ -1,0 +1,4 @@
+Create a Model Class LoanApplication with attribute like applicationNumber,applicantName,cibilScore,loanAmount
+Create a Repository add methods to add/findByApplicantName/findAll
+Create Two Implemetations of the Interface one implementation storing inmeory and another in a text file
+Swap the Implementations and practice @Autowire/@Primary/@Qaulifier/ Constructor Injection/ Setter Injection
