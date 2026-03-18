@@ -24,10 +24,12 @@ public class CustomerService {
 	}
 	
 	
-	public Customer save(CustomerDto dto) {
+	public CustomerDto save(CustomerDto dto) {
 		
 		
-		return this.repo.save(mapToEntity(dto));
+		Customer added = this.repo.save(mapToEntity(dto));
+		
+		return mapToDto(added);
 	}
 
 

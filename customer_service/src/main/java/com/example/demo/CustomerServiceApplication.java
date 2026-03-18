@@ -29,7 +29,7 @@ public class CustomerServiceApplication {
 		System.out.println("Find By Phone Number:=>"+ service.findByPhone(8928244L));
 		
 	
-		ctx.close();
+		//ctx.close();
 	}
 
 	
