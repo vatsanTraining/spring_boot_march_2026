@@ -4,7 +4,7 @@ public record CustomerDto(Long customerId,String customerName,String email,long 
 
 	
 	 public CustomerDto(Long customerId, String customerName, String email, long phoneNumber){
-		 	        this.customerId = customerId;
+		 	this.customerId = customerId;
 	        this.customerName = customerName;
 	        this.email = email;
 	        this.phoneNumber = phoneNumber;

@@ -17,14 +17,12 @@ public class CustomerServiceApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx= SpringApplication.run(CustomerServiceApplication.class, args);
 	
-		ctx.getBean(CustomerService.class)
-		  .findAll()
-		  .forEach(System.out::println);
 		
 		
 		CustomerService service = ctx.getBean(CustomerService.class);
 		
-		
+		   service.findAll().forEach(System.out::println);
+		   
 		System.out.println("Find By Name:=>"+ service.findByCustomerName("Vishwa"));
 		
 		

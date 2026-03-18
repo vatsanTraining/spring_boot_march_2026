@@ -24,10 +24,13 @@ public class CustomerService {
 	}
 	
 	
-	public Customer save(Customer entity) {
+	public Customer save(CustomerDto dto) {
 		
-		return this.repo.save(entity);
+		
+		return this.repo.save(mapToEntity(dto));
 	}
+
+
 	
 	public List<Customer> findAll(){
 		
@@ -43,6 +46,16 @@ public class CustomerService {
 		
 		Customer cust =this.repo.fetchByPhone(phone);
 		
+		return mapToDto(cust);
+	}
+
+
+	private CustomerDto mapToDto(Customer cust) {
 		return new CustomerDto(cust.getCustomerId(), cust.getCustomerName(), cust.getEmail(), cust.getPhoneNumber());
 	}
+	
+	private Customer mapToEntity(CustomerDto dto) {
+		return  new Customer(dto.customerId(),dto.customerName(),dto.phoneNumber(),dto.email());
+	}
+	
 }
