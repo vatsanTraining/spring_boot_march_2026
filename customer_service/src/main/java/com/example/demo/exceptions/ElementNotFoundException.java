@@ -1,11 +1,11 @@
 package com.example.demo.exceptions;
 
-public class ElementNotFoundEception extends Exception {
+public class ElementNotFoundException extends Exception {
 
 	private Long id;
 
 	
-	public ElementNotFoundEception(Long id) {
+	public ElementNotFoundException(Long id) {
 		super();
 		this.id = id;
 	}
