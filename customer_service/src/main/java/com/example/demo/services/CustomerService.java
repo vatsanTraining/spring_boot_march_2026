@@ -3,12 +3,14 @@ package com.example.demo.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.exceptions.ElementNotFoundEception;
 import com.example.demo.ifaces.CustomerRepository;
+
 
 @Service
 public class CustomerService {
@@ -55,6 +57,28 @@ public void removeById(Long id) throws ElementNotFoundEception {
 	  
 	}
 	
+@Transactional 
+public Customer updatePhoneNumber(Long id, long numberToUpdate) throws ElementNotFoundEception {
+	
+Customer found =repo.findById(id)
+            .orElseThrow(() -> new ElementNotFoundEception(id));
+
+      found.setPhoneNumber(numberToUpdate);
+
+      return found; 
+    
+}
+
+
+@Transactional
+public Customer updateCustomer(Customer cust) throws ElementNotFoundEception {
+	
+	if (!repo.existsById(cust.getCustomerId())) {
+        throw new ElementNotFoundEception(cust.getCustomerId());
+    }
+     return repo.save(cust);
+    
+}
 	
 	public ResponseDto findByCustomerName(String custName) {
 		
@@ -67,6 +91,8 @@ public void removeById(Long id) throws ElementNotFoundEception {
 		
 		return mapToDto(cust);
 	}
+	
+	
 
 
 	private CustomerDto mapToDto(Customer cust) {
