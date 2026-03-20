@@ -13,6 +13,8 @@ import com.example.demo.dto.CustomerDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.services.CustomerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/api/v1/customers")
 public class CustomerController {
@@ -36,7 +38,7 @@ public class CustomerController {
 	
 	
 	@PostMapping
-	ResponseEntity<CustomerDto> save(@RequestBody CustomerDto dto){
+	ResponseEntity<CustomerDto> save(@Valid @RequestBody CustomerDto dto){
 		
 		return ResponseEntity.status(201).body(service.save(dto));
 	}
