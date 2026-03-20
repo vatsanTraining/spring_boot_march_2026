@@ -39,7 +39,7 @@ public class CustomerServiceApplication {
 	}
 
 	@Bean
-	MessageSource messageSouce() {
+	ReloadableResourceBundleMessageSource messageSouce() {
 	ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
 	
 	source.setBasename("classpath:message");
