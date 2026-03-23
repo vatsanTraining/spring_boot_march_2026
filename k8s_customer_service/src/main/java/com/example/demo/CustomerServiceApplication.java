@@ -61,9 +61,9 @@ public class CustomerServiceApplication {
 			CustomerRepository repo;
 			@Override
 			public void run(String... args) throws Exception {
-				
+				repo.deleteAll();
 				repo.save(new Customer(1111L, "Tom", 7888233, "tom@abc.com"));
-				repo.save(new Customer(2222L, "Dick", 8928244, "dick@abc.com"));
+				repo.save(new Customer(2222L, "Dick", 3455902, "dick@abc.com"));
 				
 			}
 		};

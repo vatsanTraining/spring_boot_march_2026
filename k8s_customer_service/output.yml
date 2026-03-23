@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: customer-app
   name: customer-app
 spec:
+  type: LoadBalancer
   ports:
     - name: "8080"
       port: 8080
@@ -65,7 +66,7 @@ spec:
               value: jdbc:postgresql://postgres:5432/customer_db
             - name: SPRING_DATASOURCE_USERNAME
               value: user
-          image: vatsank/customer-app:1.0
+          image: vatsank/customer-service:1.0
           name: customer-app
           ports:
             - containerPort: 8080
@@ -109,7 +110,12 @@ spec:
           livenessProbe:
             exec:
               command:
-                - pg_isready -U user -d customer_db
+                - pg_isready
+                - "-U"
+                - "user"
+                - "-d"
+                - "customer_db"
+            initialDelaySeconds: 30 
             failureThreshold: 6
             periodSeconds: 10
             timeoutSeconds: 5

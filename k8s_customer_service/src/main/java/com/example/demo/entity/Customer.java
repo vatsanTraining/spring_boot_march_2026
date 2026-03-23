@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Positive;
 
 @Entity
-@Table(name = "customer_mar_26")
+@Table(name = "customer_mar_27")
 
 public class Customer {
 	
