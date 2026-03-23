@@ -3,26 +3,25 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml -o output.yaml
+    kompose.cmd: kompose convert -f compose.yml -o output.yml
     kompose.version: 1.38.0 (HEAD)
   labels:
-    io.kompose.service: loan-app
-  name: loan-app
+    io.kompose.service: customer-app
+  name: customer-app
 spec:
-  type: LoadBalancer
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
   selector:
-    io.kompose.service: loan-app
+    io.kompose.service: customer-app
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml -o output.yaml
+    kompose.cmd: kompose convert -f compose.yml -o output.yml
     kompose.version: 1.38.0 (HEAD)
   labels:
     io.kompose.service: postgres
@@ -40,23 +39,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml -o output.yaml
+    kompose.cmd: kompose convert -f compose.yml -o output.yml
     kompose.version: 1.38.0 (HEAD)
   labels:
-    io.kompose.service: loan-app
-  name: loan-app
+    io.kompose.service: customer-app
+  name: customer-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: loan-app
+      io.kompose.service: customer-app
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f compose.yml -o output.yaml
+        kompose.cmd: kompose convert -f compose.yml -o output.yml
         kompose.version: 1.38.0 (HEAD)
       labels:
-        io.kompose.service: loan-app
+        io.kompose.service: customer-app
     spec:
       containers:
         - env:
@@ -66,8 +65,8 @@ spec:
               value: jdbc:postgresql://postgres:5432/customer_db
             - name: SPRING_DATASOURCE_USERNAME
               value: user
-          image: vatsank/loan-app:2.0
-          name: loan-app
+          image: vatsank/customer-app:1.0
+          name: customer-app
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -78,7 +77,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml -o output.yaml
+    kompose.cmd: kompose convert -f compose.yml -o output.yml
     kompose.version: 1.38.0 (HEAD)
   labels:
     io.kompose.service: postgres
@@ -93,7 +92,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f compose.yml -o output.yaml
+        kompose.cmd: kompose convert -f compose.yml -o output.yml
         kompose.version: 1.38.0 (HEAD)
       labels:
         io.kompose.service: postgres
