@@ -89,13 +89,17 @@ public CustomerDto updateCustomer(CustomerDto dto) throws ElementNotFoundExcepti
 		return this.repo.findByCustomerName(custName);
 	}
 	
-	public CustomerDto findByPhone(long phone) {
-		
-		Customer cust =this.repo.fetchByPhone(phone);
-		
-		return mapToDto(cust);
-	}
-	
+//	public CustomerDto findByPhone(long phone) {
+//		
+//		    Customer cust = this.repo.fetchByPhone(phone);
+//		    if (cust == null) {
+//		        throw new RuntimeException("Customer not found for phone: " + phone);
+//		    }
+//		    return mapToDto(cust);
+//		
+//
+//			}
+//	
 	
 
 

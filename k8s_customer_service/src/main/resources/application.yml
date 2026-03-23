@@ -20,8 +20,6 @@ logging:
           jdbc:
             bind: trace
             extract: trace
-server:
-  port: 5050
 management:
   endpoints:
     web:

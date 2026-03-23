@@ -29,10 +29,10 @@ public class CustomerServiceApplication {
 		
 		   service.findAll().forEach(System.out::println);
 		   
-		System.out.println("Find By Name:=>"+ service.findByCustomerName("Vishwa"));
+	//	System.out.println("Find By Name:=>"+ service.findByCustomerName("Vishwa"));
 		
 		
-		System.out.println("Find By Phone Number:=>"+ service.findByPhone(8928244L));
+	//	System.out.println("Find By Phone Number:=>"+ service.findByPhone(8928244L));
 		
 	
 		//ctx.close();
