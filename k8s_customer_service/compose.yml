@@ -21,7 +21,7 @@ services:
     build:
       context: ./
     ports:
-      - '8080:5050'
+      - '6060:6060'
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer_db
       SPRING_DATASOURCE_USERNAME: user

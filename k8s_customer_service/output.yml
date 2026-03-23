@@ -12,8 +12,8 @@ spec:
   type: LoadBalancer
   ports:
     - name: "8080"
-      port: 8080
-      targetPort: 5050
+      port: 6060
+      targetPort: 6060
   selector:
     io.kompose.service: customer-app
 
@@ -69,7 +69,7 @@ spec:
           image: vatsank/customer-service:1.0
           name: customer-app
           ports:
-            - containerPort: 8080
+            - containerPort: 6060
               protocol: TCP
       restartPolicy: Always
 
