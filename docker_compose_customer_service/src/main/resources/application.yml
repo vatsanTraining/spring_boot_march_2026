@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: customer_service
+  datasource:
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        orm:
+          jdbc:
+            bind: trace
+            extract: trace
+server:
+  port: 5050
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

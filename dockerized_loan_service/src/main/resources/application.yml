@@ -1,0 +1,5 @@
+spring:
+  application:
+   name: loan_service
+storage:
+  medium: file
