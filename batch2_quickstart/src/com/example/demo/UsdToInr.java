@@ -5,8 +5,9 @@
  */
 package com.example.demo;
 
-  
-public class UsdToInr {
+import com.example.demo.ifaces.CurrencyConverter;
+
+public class UsdToInr implements CurrencyConverter{
 
 	// static variable or class variable
 	  private static String message1;
@@ -25,6 +26,13 @@ public class UsdToInr {
 		System.out.println(message1);
 		System.out.println(val);
 		return  usd*95.00;
+	}
+
+
+
+	@Override
+	public double convert(double arg) {
+		return convertUsdToInr(arg);
 	}
 	
 }

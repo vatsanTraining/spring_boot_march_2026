@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.exceptions.RangeCheckException;
+
 public class Book  {
 
 	
@@ -12,14 +14,18 @@ public class Book  {
 		super();
 	}
 
-	public Book(int bookNumber, String bookName, String author, double pricePerUnit) {
+	// Exception is checked Exception must  handle or declare
+
+	public Book(int bookNumber, String bookName, String author, double pricePerUnit) throws RangeCheckException{
 		super();
 		this.bookNumber = bookNumber;
 		this.bookName = bookName;
 		this.author = author;
-		if(pricePerUnit >0) {
-			  this.pricePerUnit = pricePerUnit;
+		if(pricePerUnit <=0) {
+			 throw new RangeCheckException("Price should not be a Zero or negative value");
 			}
+		  this.pricePerUnit = pricePerUnit;
+
 
 	}
 
@@ -51,10 +57,12 @@ public class Book  {
 		return pricePerUnit;
 	}
 
+	// RuntimeException is unchecked Exception no need handle nor declare
 	public void setPricePerUnit(double pricePerUnit) {
-		if(pricePerUnit >0) {
+		if(pricePerUnit <=0) {
+			 throw new RuntimeException("Price should not be a Zero or negative value");
+			}
 		  this.pricePerUnit = pricePerUnit;
-		}
 	}
 
 	@Override
