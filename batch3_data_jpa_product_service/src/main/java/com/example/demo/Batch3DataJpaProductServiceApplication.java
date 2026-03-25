@@ -22,6 +22,7 @@ public class Batch3DataJpaProductServiceApplication {
 				
 		ProductService service = ctx.getBean(ProductService.class);
 		
+		
 		service.save(printer);
 		
 		service.save(tv);
@@ -29,6 +30,8 @@ public class Batch3DataJpaProductServiceApplication {
 		service.save(tv);
 		
 		  // service.deleteById(3030);
+
+		service.updateRatePerUnit(3030, 77777.77);
 
 		service.findAll().forEach(System.out::println);
 	
