@@ -10,19 +10,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import com.example.demo.model.Reservation;
+import com.example.demo.entity.Reservation;
 import com.example.demo.services.ReservationService;
 
 @SpringBootApplication
-public class Batch2ReservationServiceApplication {
+public class Batch2DataJpaReservationServiceApplication {
 
 	public static void main(String[] args) {
+	ConfigurableApplicationContext	ctx= SpringApplication.run(Batch2DataJpaReservationServiceApplication.class, args);
 		
 		
-		ConfigurableApplicationContext ctx=SpringApplication.run(Batch2ReservationServiceApplication.class, args);
-	
-		
-		   Reservation tom = ctx.getBean("tom",Reservation.class);
+		  Reservation tom = ctx.getBean("tom",Reservation.class);
 		   
 		   Reservation dick = ctx.getBean("dick",Reservation.class);
 
@@ -35,16 +33,13 @@ public class Batch2ReservationServiceApplication {
 		   service.save(harry);
 		   service.save(dick);
 		   service.save(tom);
-		   service.save(harry);
 		   
 	
 		   
 		   service.findAll().forEach(System.out::println);
 
-	
 	}
 
-	
 	@Bean
 	Reservation tom() {
 		
@@ -71,5 +66,4 @@ public class Batch2ReservationServiceApplication {
 						LocalDate.of(2026,Month.JUNE,16),LocalTime.of(14,30)) 
 				,7300.00D, "PEN");
 	}
-	
 }

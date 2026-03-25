@@ -4,8 +4,8 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Reservation;
 import com.example.demo.ifaces.ReservationRepository;
-import com.example.demo.model.Reservation;
 
 @Service
 public class ReservationService {
@@ -15,22 +15,6 @@ public class ReservationService {
 	
 	
 
-//	public ReservationService(@Qualifier("reservationRepositorySetImpl") ReservationRepository repo) {
-//		super();
-//		this.repo = repo;
-//		
-//		System.out.println(this.repo.getClass().getName());
-//	}
-	
-	
-//	public ReservationService() {
-//		super();
-//		// TODO Auto-generated constructor stub
-//	}
-
-	// Constructor DI
-
-	//@Autowired
 	public ReservationService(ReservationRepository repo) {
 		super();
 		this.repo = repo;
@@ -38,7 +22,7 @@ public class ReservationService {
 		System.out.println(this.repo.getClass().getName());
 	}
 
-	public boolean save(Reservation obj) {
+	public Reservation save(Reservation obj) {
 		
 		return this.repo.save(obj);
 	}

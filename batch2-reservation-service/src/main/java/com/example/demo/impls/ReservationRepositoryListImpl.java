@@ -3,8 +3,7 @@ package com.example.demo.impls;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.ifaces.ReservationRepository;
@@ -12,7 +11,8 @@ import com.example.demo.model.Reservation;
 
 @Repository
 //@Primary
-@Profile("prod")
+//@Profile("prod")
+@ConditionalOnProperty(name = "storage.option",havingValue = "list")
 public class ReservationRepositoryListImpl implements ReservationRepository {
 
 	private List<Reservation> list;

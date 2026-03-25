@@ -1,18 +1,33 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
-
+@Entity
+@Table(name = "reservation_mar_26")
 public class Reservation {
 
+	@Id
+	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "passenger_name")
     private String passengerName;
-    private LocalDateTime bookingDate;
-    private Double totalAmount;
-    private String status;
+	
+	@Column(name = "booking_date")
+	private LocalDateTime bookingDate;
+    
+	@Column(name = "total_amount")
+	private Double totalAmount;
+    
+	@Column(name = "status")
+	private String status;
     
 	public Reservation() {
 		super();
