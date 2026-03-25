@@ -15,7 +15,9 @@ More than one Bean By Type - @Qualifier at the place where injection happends an
 
 More than one Bean By Type - @Profile add the annotation on the Bean which has to be injected and run application in that profile
 
-Mone than one Bean By Type 
+Mone than one Bean By Type - add a property in application.properties file and use 
+                                               @ConditionalOnProperty(havingValue = "set",name = "store.mode")
+
     
 
 
