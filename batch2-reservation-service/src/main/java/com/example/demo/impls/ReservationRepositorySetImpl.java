@@ -2,9 +2,12 @@ package com.example.demo.impls;
 
 import java.util.*;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.ifaces.ReservationRepository;
 import com.example.demo.model.Reservation;
 
+@Repository(value = "repo")
 public class ReservationRepositorySetImpl implements ReservationRepository {
 
 	

@@ -3,9 +3,12 @@ package com.example.demo.impls;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.ifaces.ReservationRepository;
 import com.example.demo.model.Reservation;
 
+@Repository
 public class ReservationRepositoryListImpl implements ReservationRepository {
 
 	private List<Reservation> list;
