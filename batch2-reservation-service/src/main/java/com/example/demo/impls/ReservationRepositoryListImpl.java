@@ -1,5 +1,6 @@
 package com.example.demo.impls;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.ifaces.ReservationRepository;
@@ -7,16 +8,22 @@ import com.example.demo.model.Reservation;
 
 public class ReservationRepositoryListImpl implements ReservationRepository {
 
+	private List<Reservation> list;
+	
+	
+	public ReservationRepositoryListImpl() {
+		super();
+		this.list = new ArrayList<>();
+	}
+
 	@Override
 	public boolean save(Reservation obj) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.list.add(obj);
 	}
 
 	@Override
 	public List<Reservation> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.list;
 	}
 
 }

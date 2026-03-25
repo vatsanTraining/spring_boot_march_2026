@@ -1,5 +1,6 @@
 package com.example.demo.ifaces;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.example.demo.model.Reservation;
@@ -7,6 +8,6 @@ import com.example.demo.model.Reservation;
 public interface ReservationRepository {
 
 	boolean save(Reservation obj);
-	List<Reservation> findAll();
+	Collection<Reservation> findAll();
 	
 }
