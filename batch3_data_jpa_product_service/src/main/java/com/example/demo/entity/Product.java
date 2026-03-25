@@ -2,16 +2,33 @@ package com.example.demo.entity;
 
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
 
-@Component
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "product_mar_26")
+
 public class Product {
 
 	
+	@Id
+	@Column(name = "product_id")
 	private int productId;
+	
+	
+	@Column(name = "product_name")
 	private String productName;
+	
+	@Column(name = "category")
 	private String category;
+	
+	
+	@Column(name = "rate_per_unit")
 	private double ratePerUnit;
+	
 	
 	public Product() {
 		super();
