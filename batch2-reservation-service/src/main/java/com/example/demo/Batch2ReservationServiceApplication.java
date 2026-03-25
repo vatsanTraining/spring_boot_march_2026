@@ -35,6 +35,7 @@ public class Batch2ReservationServiceApplication {
 		   service.save(harry);
 		   service.save(dick);
 		   service.save(tom);
+		   service.save(harry);
 		   
 		   
 		   service.findAll().forEach(System.out::println);
