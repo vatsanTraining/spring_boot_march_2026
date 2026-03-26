@@ -56,6 +56,22 @@ public class Batch2DataJpaReservationServiceApplication {
 		   
 		   service.findAll().forEach(System.out::println);
 		   
+		   
+		   System.out.println("Greater Than Given Amount");
+		   service.amountGrtThan(2000).forEach(System.out::println);
+		   
+
+		   System.out.println("Less Than Given Amount");
+
+		   service.amountLessThan(2000).forEach(System.out::println);
+		   
+		   
+		  System.out.println("Found"+service.findById(101L));
+		  
+		  
+		  System.out.println("Rows Updated "+service.updateStatus("CNF",1002L));
+		  
+		  
 	}
 
 	@Bean
