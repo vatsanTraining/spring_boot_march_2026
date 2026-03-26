@@ -26,6 +26,7 @@ public class Batch2DataJpaReservationServiceApplication {
 
 		   Reservation harry = ctx.getBean("harry",Reservation.class);
 		   
+		   Reservation amar = ctx.getBean("amar",Reservation.class);
 		   
 		   ReservationService service = ctx.getBean(ReservationService.class);
 		   
@@ -33,11 +34,28 @@ public class Batch2DataJpaReservationServiceApplication {
 		   service.save(harry);
 		   service.save(dick);
 		   service.save(tom);
-		   
+		   service.save(amar);
 	
 		   
 		   service.findAll().forEach(System.out::println);
+		   
+		   
+		   System.out.println("List By Passenger Name");
 
+		    service.findByPassengerName("Tommy").forEach(System.out::println);
+		   
+		   
+		   System.out.println("Using Projection");
+		   
+		   service.findByStatus("CNF").forEach(System.out::println);
+		   
+		   
+		   service.deleteById(1004L);
+		   
+		   System.out.println("List AFter Deleting Amar");
+		   
+		   service.findAll().forEach(System.out::println);
+		   
 	}
 
 	@Bean
@@ -63,6 +81,15 @@ public class Batch2DataJpaReservationServiceApplication {
 		
 		return new Reservation(1003L, 
 				"Harry",LocalDateTime.of(
+						LocalDate.of(2026,Month.JUNE,16),LocalTime.of(14,30)) 
+				,7300.00D, "PEN");
+	}
+	
+	@Bean
+	Reservation amar() {
+		
+		return new Reservation(1004L, 
+				"Amar",LocalDateTime.of(
 						LocalDate.of(2026,Month.JUNE,16),LocalTime.of(14,30)) 
 				,7300.00D, "PEN");
 	}

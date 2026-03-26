@@ -36,38 +36,46 @@ public class ReservationService {
 	
 	public Reservation findById(Long id) {
 		
-		return null;
+		return this.repo.findById(id)
+				.orElseThrow(()-> new RuntimeException("Element with Id "+ id + " Not Found"));
 	}
 	
 	public void deleteById(Long id) {
 		
-	}
-	
-	public Reservation updateStatus(Long id,String status) {
+
 		
-		return null;
+		if(!this.repo.existsById(id)) {
+			
+			throw new RuntimeException("Element with Id "+ id + "Not Found");
+		}
+		this.repo.deleteById(id);
 	}
 	
+	public int updateStatus(String newStatus, Long id) {
+		
+		return this.repo.updateStatus(newStatus, id);
+		
+	}
 	
 	public List<Reservation> findByPassengerName(String passName){
 		
-		return null;
+		return this.repo.findByPassengerName(passName);
 	}
 	
 public List<ResponseDto> findByStatus(String status){
 		
-		return null;
+		return this.repo.findByStatus(status);
 	}
 
 
 public List<Reservation> amountGrtThan(double amt){
 	
-	return null;
+	return this.repo.amountLessThan(amt);
 }
 
 public List<Reservation> amountLessThan(double amt){
 	
-	return null;
+	return this.repo.amountGrtThan(amt);
 }
 
 
