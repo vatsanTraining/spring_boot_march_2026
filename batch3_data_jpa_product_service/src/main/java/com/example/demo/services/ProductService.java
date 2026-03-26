@@ -44,6 +44,11 @@ public class ProductService {
 		return this.repo.findAll();
 	}
 	
+public Collection<Product> findPriceGrtThan(double price){
+		
+		return this.repo.getPriceGrtThan(price);
+		
+	}
 	@Transactional
 	public Product updateRatePerUnit(int id,double revised) {
 		

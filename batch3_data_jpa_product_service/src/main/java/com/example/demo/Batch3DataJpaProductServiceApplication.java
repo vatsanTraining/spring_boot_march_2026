@@ -39,6 +39,7 @@ public class Batch3DataJpaProductServiceApplication {
 		//System.out.println("Found Element:=>"+ service.findById(2030));
 		
 	
+		service.findPriceGrtThan(30000).forEach(System.out::println);
 	}
 
 }
