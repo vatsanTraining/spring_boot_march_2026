@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -28,7 +29,15 @@ import com.example.demo.exceptions.ElementNotFoundExcpetion;
 @RestControllerAdvice
 public class GloablExceptionHandler {
 
-	
+
+	ReloadableResourceBundleMessageSource messageSource;
+	 
+	 
+	public GloablExceptionHandler(ReloadableResourceBundleMessageSource messageSource) {
+		super();
+		this.messageSource = messageSource;
+	}
+
 	@ExceptionHandler(exception = MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String, String>>  handleValidationErrors(BindException ex,WebRequest req){
 		
@@ -47,8 +56,13 @@ public class GloablExceptionHandler {
 		
 		
 		Map<String,String> errors = new HashMap<>();
+		
+		Object[] args = new Object[]{ex.getId()};
+		
+		String message = messageSource.getMessage("element.notfound", args, locale);
 
-		errors.put("cause", ex.getMessage());
+
+		errors.put("cause", message);
 		errors.put("time", LocalDateTime.now().toString());
 		errors.put("url", req.getDescription(false));
 		

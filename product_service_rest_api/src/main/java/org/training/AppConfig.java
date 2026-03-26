@@ -2,6 +2,7 @@ package org.training;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import com.example.demo.entity.Product;
 
@@ -25,6 +26,17 @@ public class AppConfig {
 		return new Product(2030,"Sony Tv", "tv", 25000);
 		
 
+	}
+	
+	@Bean
+	ReloadableResourceBundleMessageSource messageSource() {
+		
+		ReloadableResourceBundleMessageSource obj = new ReloadableResourceBundleMessageSource();
+		
+		obj.setDefaultEncoding("UTF-8");
+		obj.addBasenames("classpath:message");
+		
+		return obj;
 	}
 
 }
