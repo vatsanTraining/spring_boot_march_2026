@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dtos.RequestDto;
 import com.example.demo.entity.Product;
+import com.example.demo.exceptions.ElementNotFoundExcpetion;
 import com.example.demo.ifaces.ProductRepository;
 import java.util.Optional;
 @Service
@@ -80,7 +81,11 @@ public Collection<Product> findPriceGrtThan(double price){
 		Optional<Product> found =this.repo.findById(id);
 		
 		if(found.isEmpty()) {
-			throw new RuntimeException("Element With given Id Not found");
+			
+		
+			
+			throw new ElementNotFoundExcpetion(Integer.toString(id));
+			
 		} else {
 			
 		    return entityToDto(found.get());
@@ -93,7 +98,7 @@ public Collection<Product> findPriceGrtThan(double price){
 	    
 	 if(!this.repo.existsById(id)) {
 		 
-		 throw new RuntimeException("Element with given id not found");
+		 throw new RuntimeException("Element With "+id +"Not found");
 	 } else {
 	       this.repo.deleteById(id);
 	 }

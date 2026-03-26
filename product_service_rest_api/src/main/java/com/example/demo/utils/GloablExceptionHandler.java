@@ -2,6 +2,7 @@ package com.example.demo.utils;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import com.example.demo.exceptions.ElementNotFoundExcpetion;
+
 @RestControllerAdvice
 public class GloablExceptionHandler {
 
@@ -37,7 +40,23 @@ public class GloablExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 		
 	}
-	
+
+	@ExceptionHandler(exception =ElementNotFoundExcpetion.class)
+	public ResponseEntity<Map<String, String>>  handleAll(ElementNotFoundExcpetion ex,
+			 WebRequest req,Locale locale){
+		
+		
+		Map<String,String> errors = new HashMap<>();
+
+		errors.put("cause", ex.getMessage());
+		errors.put("time", LocalDateTime.now().toString());
+		errors.put("url", req.getDescription(false));
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+
+		
+	}
+
 	@ExceptionHandler(exception =Exception.class)
 	public ResponseEntity<Map<String, String>>  handleAll(Exception ex, WebRequest req){
 		
