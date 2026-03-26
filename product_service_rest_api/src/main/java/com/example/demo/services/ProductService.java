@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,9 +43,11 @@ public class ProductService {
 		
 	}
 	
-	public Collection<Product> findAll(){
+	public List<RequestDto> findAll(){
 		
-		return this.repo.findAll();
+		
+		return this.repo.findAll().stream().map(this::entityToDto).toList();
+		
 	}
 	
 public Collection<Product> findPriceGrtThan(double price){
