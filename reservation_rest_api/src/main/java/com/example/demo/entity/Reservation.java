@@ -31,8 +31,8 @@ public class Reservation {
     
 	public Reservation() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
 	public Reservation(Long id, String passengerName, LocalDateTime bookingDate, Double totalAmount, String status) {
 		super();
 		this.id = id;
@@ -41,40 +41,52 @@ public class Reservation {
 		this.totalAmount = totalAmount;
 		this.status = status;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getPassengerName() {
 		return passengerName;
 	}
+
 	public void setPassengerName(String passengerName) {
 		this.passengerName = passengerName;
 	}
+
 	public LocalDateTime getBookingDate() {
 		return bookingDate;
 	}
+
 	public void setBookingDate(LocalDateTime bookingDate) {
 		this.bookingDate = bookingDate;
 	}
+
 	public Double getTotalAmount() {
 		return totalAmount;
 	}
+
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(bookingDate, id, passengerName, status, totalAmount);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,12 +100,12 @@ public class Reservation {
 				&& Objects.equals(passengerName, other.passengerName) && Objects.equals(status, other.status)
 				&& Objects.equals(totalAmount, other.totalAmount);
 	}
+
 	@Override
 	public String toString() {
 		return "Reservation [id=" + id + ", passengerName=" + passengerName + ", bookingDate=" + bookingDate
 				+ ", totalAmount=" + totalAmount + ", status=" + status + "]";
-	} 
- 
-    
+	}
+	    
     
 }
