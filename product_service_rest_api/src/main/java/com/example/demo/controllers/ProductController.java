@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,14 +44,18 @@ public class ProductController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<RequestDto> findById(@PathVariable int id ){
 		
-		return null;
+		return ResponseEntity.ok(this.service.findById(id));
 	}
+	
+	@PatchMapping
 	
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> DeleteById(@PathVariable int id ){
 		
-		return null ;  // return status code 204
+		this.service.deleteById(id);
+		
+		return ResponseEntity.noContent().build() ;  // return status code 204
 	}
 	
 	
