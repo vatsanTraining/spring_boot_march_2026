@@ -47,7 +47,13 @@ public class ProductController {
 		return ResponseEntity.ok(this.service.findById(id));
 	}
 	
-	@PatchMapping
+	@PatchMapping(path = "/{id}/{revised}")
+	
+	public ResponseEntity<RequestDto> updatePrice(@PathVariable int id , 
+			           @PathVariable double revised){
+		
+		return ResponseEntity.ok(this.service.updateRatePerUnit(id,revised));
+	}
 	
 	
 	@DeleteMapping(path = "/{id}")

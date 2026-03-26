@@ -55,8 +55,10 @@ public Collection<Product> findPriceGrtThan(double price){
 		return this.repo.getPriceGrtThan(price);
 		
 	}
+
+
 	@Transactional
-	public Product updateRatePerUnit(int id,double revised) {
+	public RequestDto updateRatePerUnit(int id,double revised) {
 		
 		
 		Product found =repo.findById(id)
@@ -64,8 +66,14 @@ public Collection<Product> findPriceGrtThan(double price){
 
 		   found.setRatePerUnit(revised);
 		   
-               return found;
+		   
+               return entityToDto(found);
 	}
+	
+	
+	
+	
+	
 	
 	public RequestDto findById(int id) {
 		
