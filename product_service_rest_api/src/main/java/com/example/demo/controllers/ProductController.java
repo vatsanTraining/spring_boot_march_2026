@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dtos.RequestDto;
 import com.example.demo.services.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/api/v1/products")
 public class ProductController {
@@ -28,7 +30,7 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<RequestDto> save(@RequestBody RequestDto dto) throws Exception{
+	public ResponseEntity<RequestDto> save(@Valid @RequestBody RequestDto dto) throws Exception{
 		
 		return ResponseEntity.status(201).body(this.service.save(dto));
 		
