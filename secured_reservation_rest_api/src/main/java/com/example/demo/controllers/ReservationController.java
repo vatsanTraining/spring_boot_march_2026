@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,7 +34,13 @@ public class ReservationController {
 	
 	
 	@GetMapping
-	ResponseEntity<Collection<RequestDto>> findAll(){
+	ResponseEntity<Collection<RequestDto>> findAll(SecurityContext sctx){
+		
+		System.out.println("User Details ===>"+sctx.getAuthentication().getName());
+		
+		System.out.println("Is Authenticated"+sctx.getAuthentication().isAuthenticated());
+		
+		
 		
 		return ResponseEntity.ok(this.service.findAll());
 		
