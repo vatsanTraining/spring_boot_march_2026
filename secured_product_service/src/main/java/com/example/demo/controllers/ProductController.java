@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,6 +34,8 @@ public class ProductController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
+
 	public ResponseEntity<RequestDto> save(@Valid @RequestBody RequestDto dto) throws Exception{
 		
 		return ResponseEntity.status(201).body(this.service.save(dto));
@@ -39,13 +43,22 @@ public class ProductController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<RequestDto>> findAll(){
+	@PreAuthorize("hasAnyRole('GUEST','ADMIN')")
+
+	public ResponseEntity<List<RequestDto>> findAll(Authentication auth){
+		
+		System.out.println("User Name ======>>>" + auth.getName());
+		
+		System.out.println("ROLES ===========================>>>");
+		
+		auth.getAuthorities().forEach(System.out::println);
 		
 		return ResponseEntity.status(200).body(this.service.findAll());
 	}
 	
 
 	@GetMapping(path = "/{id}")
+	@PreAuthorize("hasRole('GUEST')")
 	public ResponseEntity<RequestDto> findById(@PathVariable int id ){
 		
 		return ResponseEntity.ok(this.service.findById(id));
