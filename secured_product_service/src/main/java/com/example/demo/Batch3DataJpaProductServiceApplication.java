@@ -47,11 +47,11 @@ public class Batch3DataJpaProductServiceApplication {
 				myCatalogue.setDescription("Electronics 2024");
 			
 				List<Product> items = new ArrayList<>();
-				items.add(new Product(1, "Laptop", "Computing", 1200.00));
+				items.add(new Product(1, "Laptop", "computer", 1200.00));
 				items.add(new Product(2, "Mouse", "Accessories", 25.00));
 			
-				myCatalogue.setProducts(items); // Associate products with catalogue
-				repo.save(myCatalogue); // Saves everyt
+				myCatalogue.setProducts(items); 
+				repo.save(myCatalogue); 
 
 			}
 		};
