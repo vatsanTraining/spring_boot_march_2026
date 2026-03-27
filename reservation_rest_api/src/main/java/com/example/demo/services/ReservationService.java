@@ -87,12 +87,12 @@ public List<ResponseDto> findByStatus(String status){
 public Collection<RequestDto> amountGrtThan(double amt){
 	
 	
-	 return mapper(this.repo.amountLessThan(amt));
+	 return mapper(this.repo.amountGrtThan(amt));
 }
 
 public Collection<RequestDto> amountLessThan(double amt){
 	
-	return  mapper(this.repo.amountGrtThan(amt));
+	return  mapper(this.repo.amountLessThan(amt));
 }
 
 

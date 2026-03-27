@@ -60,7 +60,7 @@ public class ReservationController {
 		
 	}
 	@PostMapping
-	ResponseEntity<RequestDto> save(@RequestBody RequestDto entity){
+	ResponseEntity<RequestDto> save(@Valid @RequestBody RequestDto entity){
 		
 		System.out.println(entity);
 		return ResponseEntity.status(201).body(this.service.save(entity));
