@@ -19,6 +19,8 @@ import com.example.demo.dtos.RequestDto;
 import com.example.demo.dtos.ResponseDto;
 import com.example.demo.services.ProductService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -35,7 +37,7 @@ public class ProductController {
 	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
-
+    @Operation(method = "POST",description = "Used to Created a New Resource  type Product")
 	public ResponseEntity<RequestDto> save(@Valid @RequestBody RequestDto dto) throws Exception{
 		
 		return ResponseEntity.status(201).body(this.service.save(dto));
