@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -32,15 +33,26 @@ public class ReservationService {
 		return entityToDto(saved);
 	}
 	
-	public Collection<Reservation> findAll(){
+	public Collection<RequestDto> findAll(){
 		
-		return this.repo.findAll();
+		//this.repo.findAll().stream().map(e -> entityToDto(e)).toList();
+		
+		return mapper(this.repo.findAll());
+		
 	}
+
 	
-	public Reservation findById(Long id) {
+	
+	public RequestDto findById(Long id) {
 		
-		return this.repo.findById(id)
-				.orElseThrow(()-> new RuntimeException("Element with Id "+ id + " Not Found"));
+		Optional<Reservation> found = this.repo.findById(id);
+		
+		   if(found.isEmpty()) {
+			   
+			   throw new RuntimeException("Element with Id "+ id + " Not Found");
+		   } 
+		   
+		   return entityToDto(found.get());
 	}
 	
 	public void deleteById(Long id) {
@@ -60,25 +72,27 @@ public class ReservationService {
 		
 	}
 	
-	public List<Reservation> findByPassengerName(String passName){
+	public Collection<RequestDto> findByPassengerName(String passName){
 		
-		return this.repo.findByPassengerName(passName);
+		
+		return mapper(this.repo.findByPassengerName(passName));
 	}
 	
 public List<ResponseDto> findByStatus(String status){
 		
 		return this.repo.findByStatus(status);
+		
 	}
 
-
-public List<Reservation> amountGrtThan(double amt){
+public Collection<RequestDto> amountGrtThan(double amt){
 	
-	return this.repo.amountLessThan(amt);
+	
+	 return mapper(this.repo.amountLessThan(amt));
 }
 
-public List<Reservation> amountLessThan(double amt){
+public Collection<RequestDto> amountLessThan(double amt){
 	
-	return this.repo.amountGrtThan(amt);
+	return  mapper(this.repo.amountGrtThan(amt));
 }
 
 
@@ -99,4 +113,8 @@ public List<Reservation> amountLessThan(double amt){
 		return obj;
 	
 	}
+	private Collection<RequestDto> mapper(List<Reservation> list) {
+		return list.stream().map(this::entityToDto).toList();
+	}
+	
 }
