@@ -59,6 +59,7 @@ public class GloablExceptionHandler {
 		
 		Object[] args = new Object[]{ex.getId()};
 		
+		
 		String message = messageSource.getMessage("element.notfound", args, locale);
 
 

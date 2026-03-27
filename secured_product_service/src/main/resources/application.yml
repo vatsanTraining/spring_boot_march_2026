@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: batch3_data_jpa_product_service
+  datasource:
+    url: jdbc:h2:~/testdb
+    username: sa
+    password: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        orm:
+          jdbc:
+            bind: trace
+            extract: trace
+      springframework:
+        security: trace
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true
+    build:
+      enabled: true
+info:
+  author: training-mentor
+  app:
+    name: ${spring.application.name}
+    build:
+      groupId: '@project.groupId@'
+    buid:
+      java:
+        version: '@java.version@'
