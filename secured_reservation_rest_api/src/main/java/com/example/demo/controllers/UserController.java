@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.WebUserDto;
+
 @RestController
 @RequestMapping(path = "/api/v1/auth/")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
 	}
 	
 	@PostMapping(path = "/register")
-	public ResponseEntity<String> register(){
+	public ResponseEntity<String> register(WebUserDto dto){
 		
 		//TODO
 		return ResponseEntity.ok("will make this secured End point");

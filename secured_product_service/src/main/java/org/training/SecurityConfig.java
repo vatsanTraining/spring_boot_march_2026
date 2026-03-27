@@ -1,9 +1,7 @@
-package com.example.demo.config;
+package org.training;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.context.annotation.Configuration;import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 
 	
@@ -25,38 +22,37 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
-	
 	@Bean
-	UserDetailsService  userDetails(BCryptPasswordEncoder encoder) {
+	UserDetailsService userDetails(BCryptPasswordEncoder encoder) {
 		
 		UserDetails adminUser = User.builder()
-				   .username("india")
-				   .password(encoder.encode("delhi"))
-				   .roles("ADMIN").build();
+				              .username("india")
+				              .password(encoder.encode("delhi"))
+				              .roles("ADMIN")
+				              .build();
+		
+		
 		
 		UserDetails guestUser = User.builder()
-				.username("bhutan")
-				.password(encoder.encode("thimpu"))
-				.roles("GUEST").build();
-		
+	              .username("bhutan")
+	              .password(encoder.encode("thimpu"))
+	              .roles("GUEST")
+	              .build();;
 		
 		
 		return new InMemoryUserDetailsManager(adminUser,guestUser);
 	}
 	
+	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+	SecurityFilterChain  filterChain(HttpSecurity http) throws Exception{
 		
-		http
-		.csrf(csrf -> csrf.disable()) 
-		.authorizeHttpRequests(auth -> auth
-		.requestMatchers("/api/v1/auth/**").permitAll()
-		.anyRequest().authenticated()
-		)
-		.httpBasic(Customizer.withDefaults());
+		http.csrf(csrf -> csrf.disable())
+		 .authorizeHttpRequests(
+				 auth -> auth.requestMatchers("/api/v1/auth/**").permitAll()
+				 .anyRequest().authenticated())
+		         .httpBasic(Customizer.withDefaults());
 		
 		return http.build();
-
-		
 	}
 }

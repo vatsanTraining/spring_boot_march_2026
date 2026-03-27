@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +36,14 @@ public class ReservationController {
 	
 	
 	@GetMapping
-	ResponseEntity<Collection<RequestDto>> findAll(SecurityContext sctx){
+	@PreAuthorize("hasRole('ADMIN')")
+	ResponseEntity<Collection<RequestDto>> findAll(Authentication auth){
 		
-		System.out.println("User Details ===>"+sctx.getAuthentication().getName());
+		System.out.println("User Details ===>"+auth.getName());
 		
-		System.out.println("Is Authenticated"+sctx.getAuthentication().isAuthenticated());
+		System.out.println("Is Authenticated"+auth.isAuthenticated());
 		
+		auth.getAuthorities().forEach(System.out::println);;
 		
 		
 		return ResponseEntity.ok(this.service.findAll());
