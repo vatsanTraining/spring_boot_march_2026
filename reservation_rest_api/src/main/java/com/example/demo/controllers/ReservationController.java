@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,6 +46,19 @@ public class ReservationController {
 		
 	}
 	
+	@GetMapping(path = "/srch/name/{passName}")
+	ResponseEntity<Collection<RequestDto>> findByPassengerName(@PathVariable String passName){
+		
+		return ResponseEntity.ok(this.service.findByPassengerName(passName));
+		
+	}
+
+	@GetMapping(path = "/srch/amount/grt/{amount}")
+	ResponseEntity<Collection<RequestDto>> amountGrtThan(@PathVariable double amount){
+		
+		return ResponseEntity.ok(this.service.amountGrtThan(amount));
+		
+	}
 	@PostMapping
 	ResponseEntity<RequestDto> save(@RequestBody RequestDto entity){
 		
