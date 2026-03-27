@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dtos.RequestDto;
+import com.example.demo.dtos.ResponseDto;
 import com.example.demo.entity.Product;
 import com.example.demo.exceptions.ElementNotFoundExcpetion;
 import com.example.demo.ifaces.ProductRepository;
@@ -51,11 +52,24 @@ public class ProductService {
 		
 	}
 	
-public Collection<Product> findPriceGrtThan(double price){
+public List<ResponseDto> findByCategory(String srch){
 		
-		return this.repo.getPriceGrtThan(price);
+		
+		return this.repo.findByCategory(srch);
 		
 	}
+	
+public Collection<RequestDto> findPriceGrtThan(double price){
+		
+		return this.repo.getPriceGrtThan(price).stream().map(this::entityToDto).toList();
+		
+	}
+
+public Collection<RequestDto> findPriceLessThan(double price){
+	
+	return this.repo.getPriceLessThan(price).stream().map(this::entityToDto).toList();
+	
+}
 
 
 	@Transactional
@@ -71,7 +85,20 @@ public Collection<Product> findPriceGrtThan(double price){
                return entityToDto(found);
 	}
 	
-	
+
+	@Transactional
+	public RequestDto updateCategory(int id,String revised) {
+		
+		
+		Product found =repo.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Element With "+id +"Not found"));
+
+		   found.setCategory(revised);
+		   
+		   
+               return entityToDto(found);
+	}
+
 	
 	
 	
@@ -109,6 +136,7 @@ public Collection<Product> findPriceGrtThan(double price){
 		return new RequestDto(entity.getProductId(), entity.getProductName(),
 				entity.getCategory(), entity.getRatePerUnit());
 	}
+	
 	
 	private Product dtoToEntity(RequestDto dto) throws Exception {
 		return new Product(dto.productId(), dto.productName(), dto.category(), dto.ratePerUnit());

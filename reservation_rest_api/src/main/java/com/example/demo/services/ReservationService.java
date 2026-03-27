@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.RequestDto;
 import com.example.demo.dto.ResponseDto;
 import com.example.demo.entity.Reservation;
 import com.example.demo.ifaces.ReservationRepository;
@@ -24,9 +25,11 @@ public class ReservationService {
 		System.out.println(this.repo.getClass().getName());
 	}
 
-	public Reservation save(Reservation obj) {
+	public RequestDto save(RequestDto obj) {
 		
-		return this.repo.save(obj);
+		Reservation saved= this.repo.save(dtoToEntity(obj));
+		
+		return entityToDto(saved);
 	}
 	
 	public Collection<Reservation> findAll(){
@@ -79,8 +82,21 @@ public List<Reservation> amountLessThan(double amt){
 }
 
 
-
-
+	private RequestDto entityToDto(Reservation obj) {
+		
+		RequestDto dto = new RequestDto(obj.getId(), obj.getPassengerName(), 
+				 obj.getBookingDate(), obj.getTotalAmount(), obj.getStatus());
+		
+		return dto;
+	}
 	
+	private Reservation dtoToEntity(RequestDto dto) {
+		
+		Reservation obj =
+				new Reservation(dto.id(), dto.passengerName(), dto.bookingDate(), 
+						               dto.totalAmount(),dto.status());
+		
+		return obj;
 	
+	}
 }

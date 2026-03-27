@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dtos.RequestDto;
+import com.example.demo.dtos.ResponseDto;
 import com.example.demo.services.ProductService;
 
 import jakarta.validation.Valid;
@@ -49,7 +51,26 @@ public class ProductController {
 		return ResponseEntity.ok(this.service.findById(id));
 	}
 	
-	@PatchMapping(path = "/{id}/{revised}")
+	@GetMapping(path = "/srch/category/{category}")
+	public ResponseEntity<List<ResponseDto>> findByCategory(@PathVariable String category ){
+		
+		return ResponseEntity.ok(this.service.findByCategory(category));
+	}
+	
+	@GetMapping(path = "/srch/pricegt/{price}")
+	public ResponseEntity<Collection<RequestDto>> findByPriceGrt(@PathVariable double price ){
+		
+		return ResponseEntity.ok(this.service.findPriceGrtThan(price));
+	}
+	
+	@GetMapping(path = "/srch/pricelt/{price}")
+	public ResponseEntity<Collection<RequestDto>> findByPriceLessthan(@PathVariable double price ){
+		
+		return ResponseEntity.ok(this.service.findPriceLessThan(price));
+	}
+	
+	
+	@PatchMapping(path = "/update/price/{id}/{revised}")
 	
 	public ResponseEntity<RequestDto> updatePrice(@PathVariable int id , 
 			           @PathVariable double revised){
@@ -57,6 +78,12 @@ public class ProductController {
 		return ResponseEntity.ok(this.service.updateRatePerUnit(id,revised));
 	}
 	
+@PatchMapping(path = "/update/category/{id}/{revised}")
+	public ResponseEntity<RequestDto> updateCategory(@PathVariable int id , 
+			           @PathVariable String revised){
+		
+		return ResponseEntity.ok(this.service.updateCategory(id,revised));
+	}
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> DeleteById(@PathVariable int id ){
