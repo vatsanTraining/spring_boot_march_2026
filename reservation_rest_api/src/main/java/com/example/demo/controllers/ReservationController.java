@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.RequestDto;
 import com.example.demo.entity.Reservation;
 import com.example.demo.services.ReservationService;
 
@@ -30,24 +31,42 @@ public class ReservationController {
 	
 	
 	@GetMapping
-	ResponseEntity<Collection<Reservation>> findAll(){
+	ResponseEntity<Collection<RequestDto>> findAll(){
 		
 		return ResponseEntity.ok(this.service.findAll());
 		
 	}
 	
 	@GetMapping(path = "/{id}")
-	ResponseEntity<Reservation> findById(@PathVariable Long id){
+	ResponseEntity<RequestDto> findById(@PathVariable Long id){
 		
 		return ResponseEntity.ok(this.service.findById(id));
 		
 	}
 	
 	@PostMapping
-	ResponseEntity<Reservation> save(@RequestBody Reservation entity){
+	ResponseEntity<RequestDto> save(@RequestBody RequestDto entity){
 		
 		return ResponseEntity.status(201).body(this.service.save(entity));
 	}
 	
+	@PatchMapping(path = "/{id}/{newStatus}")
+	ResponseEntity<String> updateStatus(@PathVariable String newStatus,@PathVariable Long id){
+		
+		int rowsUpdated =this.service.updateStatus(newStatus,id);
+		
+		return ResponseEntity.ok("Rows Updated :=>"+rowsUpdated);
+		
+	}
+	
+	@DeleteMapping(path = "/{id}")
+	ResponseEntity<Void> deleteById(@PathVariable Long id){
+		
+		return ResponseEntity.noContent().build();
+		
+	}
+	
+	
+
 
 }
