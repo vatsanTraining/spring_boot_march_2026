@@ -11,11 +11,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "catalogue_mar_26")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Catalogue {
 
@@ -26,8 +28,11 @@ public class Catalogue {
 	private String description;
 	
 	@OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn()
+	@JoinColumn(name = "fk_catalogue_id", referencedColumnName = "id") 
 	private List<Product> products;
 	
 	
+	
+	
 }
+
