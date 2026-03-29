@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.dtos.RequestDto;
 import com.example.demo.dtos.ResponseDto;
 import com.example.demo.entity.Product;
-import com.example.demo.exceptions.ElementNotFoundExcpetion;
+import com.example.demo.exceptions.ElementNotFoundException;
 import com.example.demo.ifaces.ProductRepository;
+
 import java.util.Optional;
 @Service
 public class ProductService {
@@ -103,23 +105,31 @@ public Collection<RequestDto> findPriceLessThan(double price){
 	
 	
 	
-	public RequestDto findById(int id) {
+	public RequestDto findById(int id)  throws ElementNotFoundException {
 		
-		Optional<Product> found =this.repo.findById(id);
+		    return repo.findById(id)
+		               .map(this::entityToDto)
+		               .orElseThrow(() -> new ElementNotFoundException("Product not found with id: " + id));
 		
-		if(found.isEmpty()) {
-			
-		
-			
-			throw new ElementNotFoundExcpetion(Integer.toString(id));
-			
-		} else {
-			
-		    return entityToDto(found.get());
-		}
-		
+
 		
 	}
+	
+public RequestDto update(int id,  RequestDto dto) throws ElementNotFoundException {
+		
+		Product existing = this.repo.findById(id)
+		        .orElseThrow(() -> new ElementNotFoundException("Reservation not found with id: " + id));
+
+		    existing.setProductName(dto.productName());
+		    existing.setCategory(dto.category());
+		    existing.setRatePerUnit(dto.ratePerUnit());
+
+		    Product saved = this.repo.save(existing);
+		
+		    return entityToDto(saved);
+
+	}
+
 	
 	public void deleteById(int id) {
 	    

@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dtos.RequestDto;
 import com.example.demo.dtos.ResponseDto;
+import com.example.demo.exceptions.ElementNotFoundException;
 import com.example.demo.services.ProductService;
 
 import jakarta.validation.Valid;
@@ -46,7 +48,7 @@ public class ProductController {
 	
 
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<RequestDto> findById(@PathVariable int id ){
+	public ResponseEntity<RequestDto> findById(@PathVariable int id ) throws ElementNotFoundException{
 		
 		return ResponseEntity.ok(this.service.findById(id));
 	}
@@ -69,6 +71,11 @@ public class ProductController {
 		return ResponseEntity.ok(this.service.findPriceLessThan(price));
 	}
 	
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<RequestDto> update(@PathVariable int id, @Valid @RequestBody RequestDto dto) throws ElementNotFoundException {
+	    return ResponseEntity.ok(this.service.update(id, dto));
+	}
+
 	
 	@PatchMapping(path = "/update/price/{id}/{revised}")
 	

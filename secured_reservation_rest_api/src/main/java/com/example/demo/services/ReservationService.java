@@ -33,7 +33,6 @@ public class ReservationService {
 	
 	public Collection<RequestDto> findAll(){
 		
-		//this.repo.findAll().stream().map(e -> entityToDto(e)).toList();
 		
 		return mapper(this.repo.findAll());
 		
@@ -43,15 +42,11 @@ public class ReservationService {
 	
 	public RequestDto findById(Long id) throws ElementNotFoundException {
 		
-		Optional<Reservation> found = this.repo.findById(id);
 		
-		   if(found.isEmpty()) {
-			   
-			   throw new ElementNotFoundException("Element with Id "+ id + " Not Found");
-		   } 
-		   
-		   return entityToDto(found.get());
-	}
+		return this.repo.findById(id).map(this::entityToDto)
+		   .orElseThrow(() -> new ElementNotFoundException("Element with Id "+ id + " Not Found"));
+		
+			}
 	
 	public void deleteById(Long id) throws ElementNotFoundException {
 		
