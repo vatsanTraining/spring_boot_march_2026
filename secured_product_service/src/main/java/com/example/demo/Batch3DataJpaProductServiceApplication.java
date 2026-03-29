@@ -44,7 +44,7 @@ public class Batch3DataJpaProductServiceApplication {
 				
 				Catalogue myCatalogue = new Catalogue();
 				myCatalogue.setId(101);
-				myCatalogue.setDescription("Electronics 2024");
+				myCatalogue.setDescription("Electronics");
 			
 				List<Product> items = new ArrayList<>();
 				items.add(new Product(1, "Laptop", "computer", 1200.00));

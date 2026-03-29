@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.RequestDto;
 import com.example.demo.entity.Reservation;
 import com.example.demo.services.ReservationService;
+import com.example.demo.utils.ElementNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -51,7 +53,7 @@ public class ReservationController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	ResponseEntity<RequestDto> findById(@PathVariable Long id){
+	ResponseEntity<RequestDto> findById(@PathVariable Long id) throws ElementNotFoundException{
 		
 		return ResponseEntity.ok(this.service.findById(id));
 		
@@ -89,8 +91,13 @@ public class ReservationController {
 		
 	}
 	
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<RequestDto> update(@PathVariable Long id, @Valid @RequestBody RequestDto entity) throws ElementNotFoundException {
+	    return ResponseEntity.ok(this.service.update(id, entity));
+	}
+
 	@DeleteMapping(path = "/{id}")
-	ResponseEntity<Void> deleteById(@PathVariable Long id){
+	ResponseEntity<Void> deleteById(@PathVariable Long id) throws ElementNotFoundException{
 		
 		this.service.deleteById(id);
 		
