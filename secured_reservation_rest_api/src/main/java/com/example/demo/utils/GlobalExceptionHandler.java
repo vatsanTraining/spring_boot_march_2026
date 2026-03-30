@@ -16,8 +16,8 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(exception = RuntimeException.class)
-	public Map<String,String> handleRunTime(RuntimeException ex, WebRequest req,Locale locale){
+	@ExceptionHandler(exception = ElementNotFoundException.class)
+	public Map<String,String> handleRunTime(ElementNotFoundException ex, WebRequest req,Locale locale){
 		
 		Map<String,String> errors = new HashMap<>();
 		
